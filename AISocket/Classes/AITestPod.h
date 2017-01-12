@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface AITestPod : NSObject
-+ (void)showLog;
++ (void)showLog; //comment
 @end
