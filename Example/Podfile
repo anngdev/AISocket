@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AISocket_Example' do
+  pod 'AISocket', :path => '../'
+
+  target 'AISocket_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
