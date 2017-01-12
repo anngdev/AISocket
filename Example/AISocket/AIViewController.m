@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [AITestPod showLog];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

@@ -23,6 +23,7 @@
 		7D3012F63A9DB95F06477777 /* Pods_AISocket_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455E53C01FCE149123BBDA5 /* Pods_AISocket_Tests.framework */; };
 		83F221297A614BF94FCA0617 /* Pods_AISocket_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0114E4502E7BBCD302F39203 /* Pods_AISocket_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		8ECEF78F1E2783C2007877E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ECEF78E1E2783C2007877E0 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,7 @@
 /* Begin PBXFileReference section */
 		0114E4502E7BBCD302F39203 /* Pods_AISocket_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AISocket_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1208697775FB33AE79EBC7C6 /* Pods-AISocket_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISocket_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AISocket_Tests/Pods-AISocket_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		36CDA0B6CF224F6252E24960 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		36CDA0B6CF224F6252E24960 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* AISocket_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AISocket_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,12 +60,13 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8ECEF78E1E2783C2007877E0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9455E53C01FCE149123BBDA5 /* Pods_AISocket_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AISocket_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9649B624B66D34F9CE6B20AD /* Pods-AISocket_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISocket_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AISocket_Example/Pods-AISocket_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9AC3130119D32A53FF985BC9 /* Pods-AISocket_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISocket_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AISocket_Example/Pods-AISocket_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		CF604D6600C06D06E71F81F4 /* Pods-AISocket_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISocket_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AISocket_Tests/Pods-AISocket_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		E4CB3A2EB514C9B18E7F0E59 /* AISocket.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = AISocket.podspec; path = ../AISocket.podspec; sourceTree = "<group>"; };
-		E6C5CEB197BA1913AD7ADB21 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E4CB3A2EB514C9B18E7F0E59 /* AISocket.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AISocket.podspec; path = ../AISocket.podspec; sourceTree = "<group>"; };
+		E6C5CEB197BA1913AD7ADB21 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				6003F5A6195388D20070C39A /* AIViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				8ECEF78E1E2783C2007877E0 /* LaunchScreen.storyboard */,
 			);
 			name = "Example for AISocket";
 			path = AISocket;
@@ -247,6 +250,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "An Nguyen";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = M8U8DX7L2V;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -277,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				8ECEF78F1E2783C2007877E0 /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -512,7 +519,7 @@
 			baseConfigurationReference = 9AC3130119D32A53FF985BC9 /* Pods-AISocket_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = M8U8DX7L2V;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AISocket/AISocket-Prefix.pch";
 				INFOPLIST_FILE = "AISocket/AISocket-Info.plist";
@@ -528,7 +535,7 @@
 			baseConfigurationReference = 9649B624B66D34F9CE6B20AD /* Pods-AISocket_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = M8U8DX7L2V;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AISocket/AISocket-Prefix.pch";
 				INFOPLIST_FILE = "AISocket/AISocket-Info.plist";

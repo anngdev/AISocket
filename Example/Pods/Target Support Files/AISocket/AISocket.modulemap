@@ -1,0 +1,6 @@
+framework module AISocket {
+  umbrella header "AISocket-umbrella.h"
+
+  export *
+  module * { export * }
+}
