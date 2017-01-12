@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AISocket
 
 [![CI Status](http://img.shields.io/travis/An Nguyen/AISocket.svg?style=flat)](https://travis-ci.org/An Nguyen/AISocket)
@@ -27,3 +28,6 @@ An Nguyen, anngdev@gmail.com
 ## License
 
 AISocket is available under the MIT license. See the LICENSE file for more info.
+=======
+# AISocket
+>>>>>>> 2b512a04a894bb75b7f99a872633ee4ddd32a197
