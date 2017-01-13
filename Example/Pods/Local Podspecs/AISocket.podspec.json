@@ -17,5 +17,13 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "AISocket/Classes/**/*"
+  "source_files": "AISocket/Classes/**/*",
+  "dependencies": {
+    "Socket.IO-Client-Swift": [
+      "~> 8.2.0"
+    ],
+    "JSONModel": [
+
+    ]
+  }
 }

@@ -6,8 +6,13 @@
 //  Copyright (c) 2017 An Nguyen. All rights reserved.
 //
 
-@import UIKit;
+#import <JSQMessagesViewController/JSQMessagesViewController.h>
+#import "AISocketChatDatasources.h"
 
-@interface AIViewController : UIViewController
+@import UIKit;
+@import AISocket;
+
+@interface AIViewController : JSQMessagesViewController<JSQMessagesComposerTextViewPasteDelegate, AISocketManagerObserver>
+@property (strong, nonatomic) AISocketChatDatasources *datasources;
 
 @end

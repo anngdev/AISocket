@@ -23,6 +23,8 @@
 		7D3012F63A9DB95F06477777 /* Pods_AISocket_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455E53C01FCE149123BBDA5 /* Pods_AISocket_Tests.framework */; };
 		83F221297A614BF94FCA0617 /* Pods_AISocket_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0114E4502E7BBCD302F39203 /* Pods_AISocket_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		8E94AE151E28C8D60063DF68 /* AISocketChatData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E94AE141E28C8D60063DF68 /* AISocketChatData.m */; };
+		8E94AE181E28CB350063DF68 /* AISocketChatDatasources.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E94AE171E28CB350063DF68 /* AISocketChatDatasources.m */; };
 		8ECEF78F1E2783C2007877E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ECEF78E1E2783C2007877E0 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,10 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8E94AE131E28C8D60063DF68 /* AISocketChatData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISocketChatData.h; sourceTree = "<group>"; };
+		8E94AE141E28C8D60063DF68 /* AISocketChatData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AISocketChatData.m; sourceTree = "<group>"; };
+		8E94AE161E28CB350063DF68 /* AISocketChatDatasources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISocketChatDatasources.h; sourceTree = "<group>"; };
+		8E94AE171E28CB350063DF68 /* AISocketChatDatasources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AISocketChatDatasources.m; sourceTree = "<group>"; };
 		8ECEF78E1E2783C2007877E0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9455E53C01FCE149123BBDA5 /* Pods_AISocket_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AISocket_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9649B624B66D34F9CE6B20AD /* Pods-AISocket_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISocket_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AISocket_Example/Pods-AISocket_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,12 +140,16 @@
 			children = (
 				6003F59C195388D20070C39A /* AIAppDelegate.h */,
 				6003F59D195388D20070C39A /* AIAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* AIViewController.h */,
 				6003F5A6195388D20070C39A /* AIViewController.m */,
+				8E94AE161E28CB350063DF68 /* AISocketChatDatasources.h */,
+				8E94AE171E28CB350063DF68 /* AISocketChatDatasources.m */,
+				8E94AE131E28C8D60063DF68 /* AISocketChatData.h */,
+				8E94AE141E28C8D60063DF68 /* AISocketChatData.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 				8ECEF78E1E2783C2007877E0 /* LaunchScreen.storyboard */,
+				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 			);
 			name = "Example for AISocket";
 			path = AISocket;
@@ -399,7 +409,9 @@
 			files = (
 				6003F59E195388D20070C39A /* AIAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* AIViewController.m in Sources */,
+				8E94AE151E28C8D60063DF68 /* AISocketChatData.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				8E94AE181E28CB350063DF68 /* AISocketChatDatasources.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,7 +536,7 @@
 				GCC_PREFIX_HEADER = "AISocket/AISocket-Prefix.pch";
 				INFOPLIST_FILE = "AISocket/AISocket-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.anngdev.AISocket-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -540,7 +552,7 @@
 				GCC_PREFIX_HEADER = "AISocket/AISocket-Prefix.pch";
 				INFOPLIST_FILE = "AISocket/AISocket-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.anngdev.AISocket-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

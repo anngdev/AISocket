@@ -2,7 +2,8 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "AITestPod.h"
+#import "AISocketData.h"
+#import "AISocketManager.h"
 
 FOUNDATION_EXPORT double AISocketVersionNumber;
 FOUNDATION_EXPORT const unsigned char AISocketVersionString[];
