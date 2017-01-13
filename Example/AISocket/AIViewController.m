@@ -112,6 +112,10 @@
     [self finishSendingMessageAnimated:YES];
     
 }
+
+- (void)didPressAccessoryButton:(UIButton *)sender{
+    
+}
 #pragma mark - JSQMessages CollectionView DataSource
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
