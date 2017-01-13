@@ -28,14 +28,20 @@ pod "AISocket"
 
 [[AISocketManager sharedInstance] connectHost:@"http://192.168.1.10:5000" delegate:self];
 [[AISocketManager sharedInstance] listenOnEvent:[AISocketChatData eventName] dataCallback:^AISocketData *(id datas) {
+    //Whent data received, you can parse data to AISocketData, then it will be notify to all observers
     AISocketChatData *obj = [[AISocketChatData alloc]initWithString:datas error:nil];
     return obj;
 }];
+
+
+If you need to observer data on other controllers:
+
+```objective-c
+
 [[AISocketManager sharedInstance] addObserver:self onEvent:[AISocketChatData eventName]];
 
 ```
-
-##AISocket Observer
+##Observer Delegate
 ```objective-c
 
 - (void)dlgAISocketManager:(AISocketManager*)manager withData:(AISocketData*)data;
