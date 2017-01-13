@@ -71,5 +71,3 @@ An Nguyen, anngdev@gmail.com
 ## License
 
 AISocket is available under the MIT license. See the LICENSE file for more info.
-=======
-# AISocket
