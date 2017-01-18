@@ -3,14 +3,17 @@ PODS:
     - JSONModel
     - Socket.IO-Client-Swift (~> 8.2.0)
   - JSONModel (1.7.0)
-  - JSQMessagesViewController (7.3.4):
-    - JSQSystemSoundPlayer (~> 2.0.1)
-  - JSQSystemSoundPlayer (2.0.1)
+  - KVOController (1.2.0)
+  - Realm (2.2.0):
+    - Realm/Headers (= 2.2.0)
+  - Realm/Headers (2.2.0)
   - Socket.IO-Client-Swift (8.2.0)
 
 DEPENDENCIES:
   - AISocket (from `../`)
-  - JSQMessagesViewController
+  - KVOController
+  - Realm
+  - Realm/Headers
 
 EXTERNAL SOURCES:
   AISocket:
@@ -19,10 +22,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AISocket: d0bfb21de6d34b5ffd88de3998ae4c39c2896c60
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
-  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
-  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
+  Realm: d95b8fb34c83f1e764b66d319277a62c2b6e4bf5
   Socket.IO-Client-Swift: 900cf511777045c80d1ce1f11f71261e87765dd1
 
-PODFILE CHECKSUM: 6019b55908a3238208eb2694ba703f90b6b8ed85
+PODFILE CHECKSUM: 0a1e7fecf18884b162806b6cf44f33c027fccbb8
 
 COCOAPODS: 1.1.1

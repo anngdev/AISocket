@@ -19,8 +19,9 @@
 @property (strong, nonatomic) NSString          *receiverID;
 @property (strong, nonatomic) NSString          *key;
 @property (assign, nonatomic) BOOL              isSending;
-@property (assign, nonatomic) BOOL              isNeedACK;
+@property (assign, nonatomic) NSInteger         ackTime;
 - (void)setSenderID:(NSString*)senderID receiverID:(NSString*)receiverID;
 + (NSString*)eventName;
 + (NSString*)notificationKey;
++ (NSString *)randomStringWithLength:(int)len;
 @end

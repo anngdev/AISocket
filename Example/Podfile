@@ -2,10 +2,13 @@ use_frameworks!
 
 target 'AISocket_Example' do
     pod 'AISocket', :path => '../'
-    pod 'JSQMessagesViewController'
+    pod 'Realm'
+    pod 'KVOController'
+    #pod 'JSQMessagesViewController'
 
   target 'AISocket_Tests' do
     inherit! :search_paths
+    pod 'Realm/Headers'
 
     
   end

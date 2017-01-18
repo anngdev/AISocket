@@ -38,15 +38,15 @@ static AISocketManager * _AISocketManagerInstance = nil;
 //-------------------------------------------------------------------------------------------------------------------------------------------------
     switch (status) {
         case AISocketManagerNotConnect:
-        return @"AISocketManagerNotConnect";
+        return @"Not connect";
         case AISocketManagerConnecting:
-        return @"AISocketManagerConnecting";
+        return @"Connecting";
         case AISocketManagerConnected:
-        return @"AISocketManagerConnected";
+        return @"Connected";
         case AISocketManagerDisconnected:
-        return @"AISocketManagerDisconnected";
+        return @"Disconnected";
         case AISocketManagerReconnecting:
-        return @"AISocketManagerReconnecting";
+        return @"Reconnecting";
         
         default:
         break;
@@ -137,20 +137,23 @@ static AISocketManager * _AISocketManagerInstance = nil;
     if (data.isSending) {
         return;
     }
-    if(data.isNeedACK && isAdd && ![self.senderQueue containsObject:data]){
+    if(data.ackTime>=0 && isAdd && ![self.senderQueue containsObject:data]){
         [self.senderQueue addObject:data];
     }
     if (self.socket.status == SocketIOClientStatusConnected) {
-        if (data.isNeedACK) {
+        if (data.ackTime>=0) {
             OnAckCallback* callback = [self.socket emitWithAck:[[data class] eventName]  with:@[[data toJSONString]]];
             data.isSending = true;
-            [callback timingOutAfter:10 callback:^(NSArray * datas) {
-                if (datas && datas.count > 0 && [datas[0] isKindOfClass:[NSString class]] && [datas[0] isEqualToString:@"ack"]) {
-                    NSLog(@"ACK :%@",datas[0]);
-                    [self.senderQueue removeObject:data];
-                }else{
+            [callback timingOutAfter:data.ackTime callback:^(NSArray * datas) {
+                if ([datas[0] isEqualToString:@"NO ACK"]) {
                     NSLog(@"Timeout :%@",datas[0]);
                     data.isSending = false;
+                    [self notifySocketAckData:data ackData:nil];
+                }else{
+                    
+                    NSLog(@"Received :%@",datas[0]);
+                    [self.senderQueue removeObject:data];
+                    [self notifySocketAckData:data ackData:datas];
                 }
             }];
         }else{
@@ -198,6 +201,7 @@ static AISocketManager * _AISocketManagerInstance = nil;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)notifySocketData:(AISocketData*)objs{
+    //-------------------------------------------------------------------------------------------------------------------------------------------------
     if (!objs) {
         return;
     }
@@ -208,6 +212,21 @@ static AISocketManager * _AISocketManagerInstance = nil;
     }
     for(id<AISocketManagerObserver> obr in obrs){
         [obr dlgAISocketManager:self withData:objs];
+    }
+}
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)notifySocketAckData:(AISocketData*)objs ackData:(NSArray*)ackData{
+    //-------------------------------------------------------------------------------------------------------------------------------------------------
+    if (!objs) {
+        return;
+    }
+    
+    NSMutableSet * obrs = [self.eventObservers objectForKey:[[objs class] eventName]];
+    if (!obrs) {
+        return;
+    }
+    for(id<AISocketManagerObserver> obr in obrs){
+        [obr dlgAISocketManager:self withData:objs ackData:ackData];
     }
 }
 

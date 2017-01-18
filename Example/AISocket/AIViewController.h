@@ -6,7 +6,7 @@
 //  Copyright (c) 2017 An Nguyen. All rights reserved.
 //
 
-#import <JSQMessagesViewController/JSQMessagesViewController.h>
+#import "JSQMessagesViewController.h"
 #import "AISocketChatDatasources.h"
 
 @import UIKit;

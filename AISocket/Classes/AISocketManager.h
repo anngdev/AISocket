@@ -30,6 +30,7 @@ typedef AISocketData* (^AISocketManagerDataParseCallback)(id datas);
 
 - (void)dlgAISocketManager:(AISocketManager*)manager withData:(AISocketData*)data;
 - (void)dlgAISocketManager:(AISocketManager*)manager status:(AISocketManagerStatus)status;
+- (void)dlgAISocketManager:(AISocketManager*)manager withData:(AISocketData*)data ackData:(NSArray*)ackData;
 
 @end
 

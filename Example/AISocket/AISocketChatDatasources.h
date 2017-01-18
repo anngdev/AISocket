@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "JSQMessages.h"
+#import "UserObject.h"
+#import "ChatObject.h"
+
+//#define AISocketChatDatasourcesUserID @"AISocketChatDatasourcesUserID"
 
 static NSString * const kJSQDemoAvatarDisplayNameSquires = @"Socket.IO";
 
@@ -21,7 +25,13 @@ static NSString * const kJSQDemoAvatarDisplayNameSquires = @"Socket.IO";
 
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 
-@property (strong, nonatomic) NSDictionary *users;
-
-+ (NSString *) randomStringWithLength: (int) len;
+//@property (strong, nonatomic) NSDictionary *users;
+@property (strong, nonatomic) JSQMessagesAvatarImage *sysImage;
+@property (strong, nonatomic) JSQMessagesAvatarImage *outImage;
+@property (strong, nonatomic) JSQMessagesAvatarImage *inImage;
+@property (strong, nonatomic) UserObject *users;
+@property (strong, nonatomic) RLMResults<ChatObject *> *chats;
+- (void)reloadPrevious;
+- (void)deleteMessage:(JSQMessage*)msg;
++ (AISocketChatDatasources*)sharedInstance;
 @end

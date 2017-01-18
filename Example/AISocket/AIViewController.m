@@ -8,9 +8,13 @@
 
 #import "AIViewController.h"
 #import "AISocketChatData.h"
-
+#import "JSQMessageRealm.h"
+#import <KVOController/NSObject+FBKVOController.h>
 
 @interface AIViewController ()
+@property NSMutableArray * arrDatas;
+@property NSInteger someCount;
+@property FBKVOController *KVOController;
 
 @end
 
@@ -19,8 +23,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.KVOController = [FBKVOController controllerWithObserver:self];
     [self initJSQMessenger];
     [self initSocket];
+    self.arrDatas = [NSMutableArray new];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -39,7 +45,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)initSocket{
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-    [[AISocketManager sharedInstance] connectHost:@"http://192.168.1.10:5000" delegate:self];
+    [[AISocketManager sharedInstance] connectHost:@"http://192.168.1.7:5000" delegate:self];
     [[AISocketManager sharedInstance] listenOnEvent:[AISocketChatData eventName] dataCallback:^AISocketData *(id datas) {
         AISocketChatData *obj = [[AISocketChatData alloc]initWithString:datas error:nil];
         return obj;
@@ -50,7 +56,7 @@
 #pragma mark - AISocket Observer
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)dlgAISocketManager:(AISocketManager*)manager withData:(AISocketData*)data{
-    //-------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------
     if ([data isKindOfClass:[AISocketChatData class]]) {
         AISocketChatData *obj = (AISocketChatData*)data;
         if ([obj.senderID isEqualToString: self.senderId]) {
@@ -60,14 +66,16 @@
                                                  senderDisplayName:obj.senderName
                                                               date:[NSDate distantPast]
                                                               text:obj.message];
+        message.msgKey = obj.key;
         [self.datasources.messages addObject:message];
         [self finishReceivingMessage];
+        [message writeRealm];
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)dlgAISocketManager:(AISocketManager*)manager status:(AISocketManagerStatus)status{
-    //-------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------
     
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:@"System"
                                              senderDisplayName:@"System"
@@ -77,16 +85,33 @@
     [self finishReceivingMessage];
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)dlgAISocketManager:(AISocketManager *)manager withData:(AISocketData *)data ackData:(NSArray *)ackData{
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+    if (ackData==nil) {
+        return;
+    }
+    NSString * key = data.key;
+    
+    for(JSQMessage* msg in self.datasources.messages){
+        if ([msg.msgKey isEqualToString:key]) {
+            msg.status = nil;
+            [msg writeRealm];
+            [self finishReceivingMessage];
+            return;
+        }
+    }
+}
 
 #pragma mark - UI
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)initJSQMessenger{
-    //-------------------------------------------------------------------------------------------------------------------------------------------------
-    self.datasources = [[AISocketChatDatasources alloc]init];
-    self.senderId = [AISocketChatDatasources randomStringWithLength:4];;
-    self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
-    
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+    self.datasources = [AISocketChatDatasources sharedInstance];
+    [self.datasources addObserver:self forKeyPath:@"chats.@count" options:0 context:nil];
+    self.senderId = self.datasources.users.userID;
+    self.senderDisplayName = self.datasources.users.userName;
     self.inputToolbar.contentView.textView.pasteDelegate = self;
     self.showLoadEarlierMessagesHeader = YES;
 }
@@ -101,19 +126,24 @@
     
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     AISocketChatData *obj = [[AISocketChatData alloc]init];
-    [obj setSenderID:senderId receiverID:@"000x0"];
     [obj setMessage:text senderName:senderDisplayName];
+    [obj setSenderID:senderId receiverID:@"000x0"];
     [[AISocketManager sharedInstance] emitData:obj];
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:obj.senderID
                                              senderDisplayName:obj.senderName
                                                           date:[NSDate distantPast]
                                                           text:obj.message];
+    message.msgKey = obj.key;
+    message.status = @"Sending...";
+    [message writeRealm];
     [self.datasources.messages addObject:message];
     [self finishSendingMessageAnimated:YES];
+    NSLog(@"Chat count %lu", (unsigned long)self.datasources.chats.count);
     
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender{
+//    [[self mutableArrayValueForKey:@"arrDatas"] addObject:@"abc"];
     
 }
 #pragma mark - JSQMessages CollectionView DataSource
@@ -142,7 +172,10 @@
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage *message = [self.datasources.messages objectAtIndex:indexPath.item];
-    return nil;
+    if ([message.senderId isEqualToString:@"System"]) {
+        return self.datasources.sysImage;
+    }
+    return [message.senderId isEqualToString:self.senderId]?self.datasources.outImage:self.datasources.inImage;
     
 }
 
@@ -205,6 +238,9 @@
         
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+    }
+    if (msg.status) {
+        cell.cellBottomLabel.text = msg.status;
     }
     
     return cell;
@@ -284,6 +320,10 @@
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    JSQMessage *currentMessage = [self.datasources.messages objectAtIndex:indexPath.item];
+    if (currentMessage.status) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
     return 0.0f;
 }
 
@@ -292,7 +332,10 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
-    NSLog(@"Load earlier messages!");
+//    NSLog(@"Load earlier messages!");
+    [self.datasources reloadPrevious];
+    [self finishReceivingMessage];
+    [self scrollToIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:true];
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
@@ -303,6 +346,10 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Tapped message bubble!");
+    JSQMessage *currentMessage = [self.datasources.messages objectAtIndex:indexPath.item];
+    [currentMessage deleteRealm];
+    [self.datasources deleteMessage:currentMessage];
+    [self finishReceivingMessage];
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation

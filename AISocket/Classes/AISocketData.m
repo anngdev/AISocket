@@ -14,7 +14,8 @@
 {
     self = [super init];
     if (self) {
-        self.key = [NSString stringWithFormat:@"%ld",(unsigned long)self.hash];
+        self.key = [AISocketData randomStringWithLength:8];
+        self.ackTime = 0;
     }
     return self;
 }
@@ -35,7 +36,9 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
     return @"defaultNotificationKey";
 }
+//-------------------------------------------------------------------------------------------------------------------------------------------------
 + (BOOL)propertyIsIgnored:(NSString *)propertyName{
+//-------------------------------------------------------------------------------------------------------------------------------------------------
     if ([propertyName isEqualToString:@"isSending"]) {
         return true;
     }
@@ -44,4 +47,18 @@
     }
     return [super propertyIsIgnored:propertyName];
 }
+
+static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//-------------------------------------------------------------------------------------------------------------------------------------------------
++ (NSString *)randomStringWithLength:(int)len{
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+    }
+    
+    return randomString;
+}
+
 @end
