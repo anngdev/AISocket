@@ -44,8 +44,9 @@ If you need to observer data on other controllers:
 ##Observer Delegate
 ```objective-c
 
-- (void)dlgAISocketManager:(AISocketManager*)manager withData:(AISocketData*)data;
 - (void)dlgAISocketManager:(AISocketManager*)manager status:(AISocketManagerStatus)status;
+- (void)dlgAISocketManager:(AISocketManager*)manager withData:(AISocketData*)data;
+- (void)dlgAISocketManager:(AISocketManager*)manager withData:(AISocketData*)data ackData:(NSArray*)ackData;
 
 ```
 
