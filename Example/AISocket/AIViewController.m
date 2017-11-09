@@ -346,10 +346,10 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Tapped message bubble!");
-    JSQMessage *currentMessage = [self.datasources.messages objectAtIndex:indexPath.item];
-    [currentMessage deleteRealm];
-    [self.datasources deleteMessage:currentMessage];
-    [self finishReceivingMessage];
+//    JSQMessage *currentMessage = [self.datasources.messages objectAtIndex:indexPath.item];
+//    [currentMessage deleteRealm];
+//    [self.datasources deleteMessage:currentMessage];
+//    [self finishReceivingMessage];
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation

@@ -104,6 +104,9 @@ static AISocketManager * _AISocketManagerInstance = nil;
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)addObserver:(id<AISocketManagerObserver>)observer onEvent:(NSString*)eventName{
 //-------------------------------------------------------------------------------------------------------------------------------------------------
+    if (!observer) {
+        return;
+    }
     NSMutableSet * obrs = [self.eventObservers objectForKey:eventName];
     if (!obrs) {
         obrs = [NSMutableSet new];
